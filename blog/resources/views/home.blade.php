@@ -9,10 +9,9 @@
 
                 <div class="row">
                   <div class="col-md-4">
-                    <painel titulo="Conteúdo 1" cor="panel-success">
-                      Teste de conteúdo..
-
-                    </painel>
+                    <caixa>
+                    
+                    </caixa>
                   </div>
                   <div class="col-md-4">
                     <painel titulo="Conteúdo 2" cor="panel-warning">
