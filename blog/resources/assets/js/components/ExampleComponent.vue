@@ -3,10 +3,10 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Testando!</div>
+                    <div class="panel-heading">Outro componente</div>
 
                     <div class="panel-body">
-                        Teste Componente
+                        I'm an example component!
                     </div>
                 </div>
             </div>
