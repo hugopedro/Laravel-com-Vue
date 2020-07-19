@@ -54,7 +54,7 @@
 
 <script>
     export default {
-      props:['titulos','itens','criar','detalhe','editar','deletar','token'],
+      props:['titulos','itens','ordem','ordemcol','criar','detalhe','editar','deletar','token'],
       data: function() {
         return {
           buscar:''
@@ -67,7 +67,27 @@
       },
       computed: {
         lista:function() {
-          let busca = "php";
+
+          let ordem = this.ordem || "asc"; // se for escolhido algo sem ser asc e desc ele ativa o valor padrão
+          let ordemCol = this.ordem || 0;
+
+          ordem = ordem.toLowerCase(); // tudo minusculo pra nao bugar
+          ordemCol = parseInt(ordemCol); //transforma em inteiro
+
+          if(ordem == "asc") { //função de ordenação
+            this.itens.sort(function(a,b){
+              if (a[ordemCol] > b[ordemCol]) {return 1;}
+              if (a[ordemCol] < b[ordemCol]) {return -1;}
+              return 0;
+            });
+          } else {
+            this.itens.sort(function(a,b){
+              if (a[ordemCol] < b[ordemCol]) {return 1;}
+              if (a[ordemCol] > b[ordemCol]) {return -1;}
+              return 0;
+           });
+          }
+
           return this.itens.filter(res => {
             for (let k = 0; k < res.length; k++) {
               if ((res[k] + "").toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0 ) {
