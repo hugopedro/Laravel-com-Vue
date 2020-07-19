@@ -46023,39 +46023,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['titulos', 'itens', 'ordem', 'ordemcol', 'criar', 'detalhe', 'editar', 'deletar', 'token'],
+  props: ["titulos", "itens", "ordem", "ordemcol", "criar", "detalhe", "editar", "deletar", "token"],
   data: function data() {
     return {
-      buscar: ''
+      buscar: "",
+      ordemAux: this.ordem || "asc",
+      ordemAuxCol: this.ordemcol || 0
     };
   },
   methods: {
     executaForm: function executaForm(index) {
       document.getElementById(index).submit();
+    },
+    ordenaColuna: function ordenaColuna(coluna) {
+      this.ordemAuxCol = coluna;
+      if (this.ordemAux.toLowerCase() == "asc") {
+        this.ordemAux = "desc";
+      } else {
+        this.ordemAux = "asc";
+      }
     }
   },
   computed: {
     lista: function lista() {
       var _this = this;
 
-      var ordem = this.ordem || "asc"; // se for escolhido algo sem ser asc e desc ele ativa o valor padrão
-      var ordemCol = this.ordem || 0;
-
-      ordem = ordem.toLowerCase(); // tudo minusculo pra nao bugar
-      ordemCol = parseInt(ordemCol); //transforma em inteiro
+      var ordem = this.ordemAux;
+      var ordemCol = this.ordemAuxCol;
+      ordem = ordem.toLowerCase();
+      ordemCol = parseInt(ordemCol);
 
       if (ordem == "asc") {
-        //função de ordenação
         this.itens.sort(function (a, b) {
           if (a[ordemCol] > b[ordemCol]) {
             return 1;
@@ -46070,7 +46070,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           if (a[ordemCol] < b[ordemCol]) {
             return 1;
           }
-          if (a[ordemCol] > b[ordemCol]) {
+          if (a[v] > b[ordemCol]) {
             return -1;
           }
           return 0;
@@ -46081,10 +46081,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         for (var k = 0; k < res.length; k++) {
           if ((res[k] + "").toLowerCase().indexOf(_this.buscar.toLowerCase()) >= 0) {
             return true;
-          } //((res[k] + "") transforma inteiro para string. aqui é a função buscar
+          }
         }
         return false;
       });
+
       return this.itens;
     }
   }
@@ -46104,29 +46105,29 @@ var render = function() {
         ? _c("a", { attrs: { href: _vm.criar } }, [_vm._v("Criar")])
         : _vm._e(),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group pull right" }),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.buscar,
-            expression: "buscar"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "search", placeholder: "Buscar" },
-        domProps: { value: _vm.buscar },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      _c("div", { staticClass: "form-group pull-right" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.buscar,
+              expression: "buscar"
             }
-            _vm.buscar = $event.target.value
+          ],
+          staticClass: "form-control",
+          attrs: { type: "search", placeholder: "Buscar" },
+          domProps: { value: _vm.buscar },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.buscar = $event.target.value
+            }
           }
-        }
-      })
+        })
+      ])
     ]),
     _vm._v(" "),
     _c("table", { staticClass: "table table-striped table-hover" }, [
@@ -46134,8 +46135,19 @@ var render = function() {
         _c(
           "tr",
           [
-            _vm._l(_vm.titulos, function(titulo) {
-              return _c("th", [_vm._v(_vm._s(titulo))])
+            _vm._l(_vm.titulos, function(titulo, index) {
+              return _c(
+                "th",
+                {
+                  staticStyle: { cursor: "pointer" },
+                  on: {
+                    click: function($event) {
+                      return _vm.ordenaColuna(index)
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(titulo))]
+              )
             }),
             _vm._v(" "),
             _vm.detalhe || _vm.editar || _vm.deletar
@@ -46190,7 +46202,7 @@ var render = function() {
                             _vm._v(" "),
                             _vm.editar
                               ? _c("a", { attrs: { href: _vm.editar } }, [
-                                  _vm._v(" Editar |")
+                                  _vm._v("Editar |")
                                 ])
                               : _vm._e(),
                             _vm._v(" "),
@@ -46204,7 +46216,7 @@ var render = function() {
                                   }
                                 }
                               },
-                              [_vm._v(" Deletar")]
+                              [_vm._v("Deletar")]
                             )
                           ]
                         )
@@ -46220,13 +46232,13 @@ var render = function() {
                           _vm._v(" "),
                           _vm.editar
                             ? _c("a", { attrs: { href: _vm.editar } }, [
-                                _vm._v(" Editar |")
+                                _vm._v("Editar |")
                               ])
                             : _vm._e(),
                           _vm._v(" "),
                           _vm.deletar
                             ? _c("a", { attrs: { href: _vm.deletar } }, [
-                                _vm._v(" Deletar")
+                                _vm._v("Deletar")
                               ])
                             : _vm._e()
                         ])
@@ -46242,7 +46254,7 @@ var render = function() {
                           _vm._v(" "),
                           _vm.editar
                             ? _c("a", { attrs: { href: _vm.editar } }, [
-                                _vm._v(" Editar")
+                                _vm._v("Editar")
                               ])
                             : _vm._e()
                         ])
