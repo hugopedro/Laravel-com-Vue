@@ -5,8 +5,7 @@
     <painel titulo="Lista de Artigos">
       <migalhas v-bind:lista="{{$listaMigalhas}}"></migalhas>
 
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#meuModalTeste">Large Model</button>
-
+      <modallink tipo="button" nome="meuModalTeste" titulo="Criar" css=""></modallink>
 
       <tabela-lista
       v-bind:titulos="['#','Título','Descrição']"
