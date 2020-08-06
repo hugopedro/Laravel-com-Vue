@@ -1,20 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<pagina tamanho="10">
-  <painel titulo="Dashboard">
-    <migalhas v-bind:lista="{{$listaMigalhas}}"></migalhas>
+<div class="container">
     <div class="row">
-      <div class="col-md-4">
-        <caixa qtd="80" titulo="Artigos" url="{{route('artigos.index')}}" cor="orange" icone="ion ion-pie-graph"></caixa>
-      </div>
-      <div class="col-md-4">
-        <caixa qtd="1500" titulo="Usuários" url="#" cor="blue" icone="ion ion-person-stalker"></caixa>
-      </div>
-      <div class="col-md-4">
-        <caixa qtd="3" titulo="Autores" url="#" cor="red" icone="ion ion-pie-graph"></caixa>
-      </div>
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Dashboard</div>
+
+                <div class="panel-body">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    You are logged in!
+                </div>
+            </div>
+        </div>
     </div>
-  </painel>
-</pagina>
+</div>
 @endsection
